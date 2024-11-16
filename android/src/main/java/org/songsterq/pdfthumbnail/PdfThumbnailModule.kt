@@ -44,6 +44,8 @@ class PdfThumbnailModule(reactContext: ReactApplicationContext) :
 
       val result = renderPage(pdfRenderer, page, filePath, quality)
       promise.resolve(result)
+    } catch (ex: SecurityException) {
+      promise.reject("SECURITY_EXCEPTION", "A security issue occurred, possibly due to an incorrect password.")
     } catch (ex: IOException) {
       promise.reject("INTERNAL_ERROR", ex)
     } finally {
